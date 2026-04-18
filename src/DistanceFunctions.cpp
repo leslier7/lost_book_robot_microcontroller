@@ -78,33 +78,13 @@ bool setupTof(){
             return false;
         }
         dist_sensors[i].startContinuous(50);
+        delay(50);
     }
     return true;
 }
 
-int getSensor(DistSensor_t sensor){
-
-  switch (sensor){
-    case FRONT:
-      break;
-
-    case LEFT:
-      break;
-    
-    case RIGHT:
-      break;
-
-    case BACK:
-      break;
-
-    case EXTRA:
-      break;
-
-    default:
-      break;
-  }
-
-
-  return 0;
+int getDistance(DistSensor_t sensor){
+  pcaselect(sensor);
+  return dist_sensors[sensor].read();
 }
 

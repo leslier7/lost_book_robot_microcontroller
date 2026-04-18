@@ -9,7 +9,7 @@
 void setup() {
   Serial.begin(115200);
   unsigned long start = millis();
-  while (!Serial && millis() - start < 3000) delay(10);
+  while (!Serial && millis() - start < 10000) delay(10);
   Serial.println("Hello world!\n");
 
   setupLight();
@@ -18,7 +18,11 @@ void setup() {
 }
 
 void loop() {
-  // delay(3000);
-  // bool temp_light = !getLightValue();
-  // setLight(temp_light);
+  Serial.printf("FRONT: %d mm\r\n", getDistance(FRONT));
+  Serial.printf("LEFT:  %d mm\r\n", getDistance(LEFT));
+  Serial.printf("RIGHT: %d mm\r\n", getDistance(RIGHT));
+  Serial.printf("BACK:  %d mm\r\n", getDistance(BACK));
+  Serial.printf("EXTRA: %d mm\r\n", getDistance(EXTRA));
+  Serial.print("\r\n");
+  delay(500);
 }

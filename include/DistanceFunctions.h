@@ -16,4 +16,6 @@ typedef enum {
 
 bool setupTof();
 
+int getDistance(DistSensor_t sensor);
+
 #endif
