@@ -4,22 +4,25 @@
 bool light_status = false;
 
 void setupLight(){
+    analogWriteFreq(LIGHT_PWM_FREQ);
     pinMode(LIGHT_PIN, OUTPUT);
 }
 
+void setLightBrightness(float brightness){
+    analogWrite(LIGHT_PIN, (uint8_t)(brightness * 255.0f));
+    light_status = brightness > 0.0f;
+}
+
 void setLight(bool value){
-    digitalWrite(LIGHT_PIN, value);
-    light_status = value;
+    setLightBrightness(value ? 1.0f : 0.0f);
 }
 
 void turnOnLight(){
-    digitalWrite(LIGHT_PIN, HIGH);
-    light_status = true;
+    setLightBrightness(1.0f);
 }
 
 void turnOffLight(){
-    digitalWrite(LIGHT_PIN, LOW);
-    light_status = false;
+    setLightBrightness(0.0f);
 }
 
 bool getLightValue(){

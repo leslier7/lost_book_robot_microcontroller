@@ -62,7 +62,12 @@ static void timer_callback(rcl_timer_t *inputTimer, int64_t last_call_time) {
 
 static void light_subscription_callback(const void *msgin) {
     const auto *msg = (const lost_book_msgs__msg__Light *) msgin;
-    setLight(msg->state == lost_book_msgs__msg__Light__ON);
+    //setLight(msg->state == lost_book_msgs__msg__Light__ON);
+    if (msg->state == lost_book_msgs__msg__Light__ON){
+        setLightBrightness(0.5);
+    } else {
+        setLightBrightness(0.0f);
+    }
 }
 
 bool create_entities() {

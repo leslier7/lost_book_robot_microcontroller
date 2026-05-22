@@ -5,6 +5,7 @@
 #include "DistanceFunctions.h"
 #include "microRosFunctions.h"
 
+bool light_val = false;
 
 void setup() {
   Serial.begin(115200);
@@ -12,7 +13,15 @@ void setup() {
   while (!Serial && millis() - start < 10000) delay(10);
 
   setupLight();
-  setLight(true);
+  
+  for(int i = 0; i < 3; i++){
+    setLight(true);
+    delay(500);
+    setLight(false);
+    delay(500);
+  }
+
+  
   setupTof();
 
 #ifdef ROS
@@ -32,4 +41,8 @@ void loop() {
   Serial.print("\r\n");
   delay(500);
 #endif
+
+// light_val = !light_val;
+// setLight(light_val);
+
 }
